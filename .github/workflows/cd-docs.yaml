@@ -23,6 +23,7 @@ jobs:
         run: npm i pnpm -g
 
       - name: Setup pnpm
+        shell: bash
         run: pnpm setup
 
       - name: Install Vercel CLI
