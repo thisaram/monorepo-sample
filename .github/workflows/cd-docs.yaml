@@ -3,7 +3,6 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
   SHELL: bash
-  PNPM_HOME: /home/runner/.local/share/pnpm
 on:
   workflow_dispatch:
   push:
@@ -32,7 +31,7 @@ jobs:
         run: source /home/runner/.bashrc
 
       - name: Install Vercel CLI
-        run: pnpm install --global vercel@latest
+        run: npm install --global vercel
       
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
