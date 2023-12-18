@@ -3,6 +3,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_DOCS_PROJECT_ID }}
   SHELL: bash
+  PNPM_HOME: /home/runner/.local/share/pnpm
 on:
   workflow_dispatch:
   push:
