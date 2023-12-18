@@ -27,6 +27,9 @@ jobs:
         shell: bash
         run: pnpm setup
 
+      - name: Setup pnpm variables
+        run: source /home/runner/.bashrc
+
       - name: Install Vercel CLI
         run: pnpm install --global vercel@latest
       
