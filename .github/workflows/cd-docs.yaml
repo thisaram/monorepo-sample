@@ -20,16 +20,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install pnpm
-        run: npm i pnpm -g
-
-      - name: Setup pnpm
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+          
+      - name: Get pnpm store directory
         shell: bash
-        run: pnpm setup
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - name: Setup pnpm variables
-        run: source /home/runner/.bashrc
-
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+        
       - name: Install Vercel CLI
         run: npm install --global vercel
       
